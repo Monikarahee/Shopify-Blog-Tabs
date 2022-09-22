@@ -1,0 +1,122 @@
+.blog-articles {
+  display: grid;
+  grid-gap: 3rem;
+}
+
+.art-card__content{
+  padding: 2rem 0;
+}
+
+.art-card__link {
+  color: var(--clr-primary-light);
+}
+
+.art-card__title{
+  color: var(--clr-title);
+  font-size: var(--fs-4); 
+  text-align: left;
+  font-weight: 500;
+}
+
+.art-card__image-wrapper {
+/*   height: 226px; */
+}
+
+.art-card__image-wrapper img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.blog-articles__article{
+  display: initial; 
+}
+
+.art-card__image-wrapper {
+/*     height: 246px; */
+  }
+
+.art-card__title a{
+  font-family: var(--ff-primary);
+  font-size: var(--fs-4);
+  font-weight: 500;
+}
+
+.art-card__image-wrapper img{
+  aspect-ratio: 2/1; 
+}
+
+/* All Blogs Thought Cards */
+
+.art-card-thought_with_text .textbox h3 {
+  color: #103a5d;
+  text-align: left;
+}
+
+.art-card-thought_with_text .textbox {
+  position: relative;
+  background: transparent;
+  display: block;
+}
+ 
+
+
+@media screen and (min-width: 750px) {
+  
+  .art-card__excerpt{
+    margin: 1.4rem 0; 
+  }
+  
+  .art-card__excerpt,
+  .art-card__link{
+    font-size: calc(var(--fs-body) - 1px); 
+  }
+  
+  .blog-articles {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 3rem;
+  }
+  
+  
+  
+  .art-card__link:hover {
+      color: var(--clr-dark-fade);
+  }
+
+  .art-card__image-wrapper:hover img {
+    transform: scale(1.1);
+  }
+
+  .art-card__image-wrapper img {
+    transition: 1s ease;
+  }
+
+  .art-card__image-wrapper {
+    overflow: hidden;
+  }
+  
+/*   .blog-articles {
+    grid-template-columns: 1fr 1fr;
+  } */
+
+  .blog-articles > *:first-child,
+  .blog-articles > *:nth-child(4),
+  .blog-articles > *:last-child:nth-child(2),
+  .blog-articles > *:last-child:nth-child(5) {
+/*     grid-column: span 2;
+    text-align: center; */
+  }
+}
+
+
+@media screen and (min-width: 1600px){
+  .all_blogs_sec .grid-cards{
+    grid-gap: 4rem; 
+  }
+}
+
+
+
+.display-none{
+  display: none; 
+}

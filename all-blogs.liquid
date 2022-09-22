@@ -1,0 +1,162 @@
+{{ 'section-main-blog.css' | asset_url | stylesheet_tag }}
+
+<style>
+
+.grid-cards {
+  display: grid;
+  grid-gap: 3rem;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+}
+  
+.grid-cards--33{
+  grid-template-columns: repeat(3, 1fr);
+}
+  
+  .tabs-wrap {
+    padding: 2rem 8rem 8rem 8rem;
+  }
+  
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  .btn--tab.is-active{
+     background-color: var(--clr-primary);
+     color: var(--clr-accent);
+  }
+  
+  .not-found-msg-wrap{
+    display: none; 
+  }
+  
+  @media screen and (max-width: 1420px){
+    .btn--tab{
+      font-size: 16px; 
+      padding: 1.2rem 2.5rem;
+    }
+    
+   .tabs-wrap {
+     padding: 2rem 0 5rem 0;
+    }
+    
+    .tabs{
+      gap: 1.5rem; 
+    }
+  }
+
+  @media screen and (max-width: 610px) {
+    .grid-cards--sm-1{
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .display-block{
+    display: block; 
+  }
+  
+</style>
+
+<section class="all_blogs_sec spaced-sec">
+  <div class="page-width">
+   <div class="blogs-tabs">
+    <div class="tabs-wrap">
+      <div class="tabs tabs--blog">
+        <button data-blog="all-blogs" class="btn-custom btn--secondary btn--tab is-active"> All Articles</button>
+        {% for block in section.blocks %}
+
+        {% assign blog = block.settings.blog %}
+        
+        <button data-blog="{{ blog.handle }}" class="btn-custom btn--secondary btn--tab"> {{ blog.title }} </button>
+
+        {% endfor %}
+      </div>
+    </div>
+    
+    <div class="blogs-wrap">
+      <div class="grid-cards grid-cards--33 grid-cards--sm-1 art-cards {% if section.settings.card_type == 'thoughts' %} grid-cards--thoughts {% endif %}">
+      {% for block in section.blocks %}
+      {% assign blog = block.settings.blog %}
+		
+        {% for article in blog.articles %}
+          {% if section.settings.card_type == 'legacy' %}
+            {%- render 'article-card-new', article: article, blog: blog -%}
+          {% elsif section.settings.card_type == 'thoughts' %}
+            {% render 'article-card-thoughts', article: article %}
+          {% endif %}
+        {% endfor %}
+
+      {%- endfor -%}
+    </div>
+    <div class="not-found-msg-wrap" id="not-found-msg-wrap">
+      <h3 id="not-found-msg">
+      	No More Articles Found
+      </h3>  
+    </div>
+    </div>
+   </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Blogs",
+    "settings": [
+	  {
+        "type": "select",
+        "id": "card_type",
+        "label": "Card Type",
+        "options": [
+          {
+            "value": "legacy",
+            "label": "Legacy"
+          },
+          {
+            "value": "thoughts",
+            "label": "Thoughts"
+          }
+        ],
+        "default": "legacy"
+      }
+	],
+	"blocks": [
+	  {
+		"type": "blog",
+		"name": "Blog",
+		"settings": [
+		  {
+		    "type": "blog",
+			"id": "blog",
+			"label": "Blog"
+		  }
+		]
+	  }
+	],
+	"presets": [
+	  {
+		"name": "Blogs",
+		"blocks": [
+		  {
+		    "type": "blog"
+		  },
+		  {
+		    "type": "blog"
+		  },
+		  {
+		    "type": "blog"
+		  }
+		]
+	  }
+	]
+	
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
